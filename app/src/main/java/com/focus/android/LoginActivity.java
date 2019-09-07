@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(LoginActivity.this,"此处登录按钮还未添加相关验证逻辑，直接跳转到主界面",Toast.LENGTH_LONG).show();
-                Intent Main_Sur = new Intent("com.Focus.Main_Surface");
+                Intent Main_Sur = new Intent("com.Focus.MainSurface");
                 startActivity(Main_Sur);
             }
         });

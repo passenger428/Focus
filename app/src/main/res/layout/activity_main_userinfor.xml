@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--个人资料-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6FA">
+
+    <LinearLayout>
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="50dp"
+            android:id="@+id/imgreturn"
+            android:background="@null"/>
+            <!--android:layout_weight="1"-->
+
+        <Button
+            android:layout_height="match_parent"
+            android:layout_marginLeft="800px"
+            android:layout_width="50dp"
+            android:id="@+id/imgsetting"
+            android:background="@null"/>
+            <!--android:layout_weight="1"-->
+
+    </LinearLayout>
+
+    <!--头像-->
+  <LinearLayout
+      android:layout_gravity="center_horizontal"
+      android:gravity="center">
+
+      <Button
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:id="@+id/iv_circle_header"
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:background="@drawable/touxiang"
+          />
+  </LinearLayout>
+
+
+    <TableRow android:layout_marginTop="40px">
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="42dp"
+            android:paddingTop="14px"
+            android:paddingLeft="35px"
+            android:text="姓名:"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/userName"
+            android:inputType="textPhonetic"
+            android:text="XXX"
+            android:textSize="20dp"
+            />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="42dp"
+            android:paddingTop="14px"
+            android:paddingLeft="35px"
+            android:text="社区昵称:"
+            android:layout_marginTop="18px"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/usernicename"
+            android:text="XXX"
+            android:textSize="20dp"
+            android:layout_marginTop="18px"
+            />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="42dp"
+            android:paddingTop="14px"
+            android:paddingLeft="35px"
+            android:text="性别:"
+            android:layout_marginTop="18px"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/userSex"
+            android:text="男"
+            android:textSize="20dp"
+            android:layout_marginTop="18px"
+            />
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="42dp"
+            android:paddingTop="14px"
+            android:paddingLeft="35px"
+            android:text="所属大学:"
+            android:layout_marginTop="18px"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/userSchool"
+            android:text="江苏科技大学"
+            android:textSize="20dp"
+            android:layout_marginTop="18px"
+            />
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="42dp"
+            android:paddingTop="14px"
+            android:paddingLeft="35px"
+            android:text="邮箱:"
+            android:layout_marginTop="18px"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/userPost"
+            android:text="xxxxxxxxx@qq.com"
+            android:textSize="20dp"
+            android:layout_marginTop="18px"
+            />
+    </TableRow>
+    <TableRow>
+
+        <TextView
+            android:layout_width="158dp"
+            android:layout_height="42dp"
+            android:paddingTop="14px"
+            android:paddingLeft="35px"
+            android:text="专业:"
+            android:layout_marginTop="18px"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/usermajor"
+            android:text="计算机"
+            android:textSize="20dp"
+            android:layout_marginTop="18px"
+            />
+    </TableRow>
+
+</TableLayout>
