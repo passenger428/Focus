@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -53,7 +52,7 @@ public class HomeFragment extends Fragment {
     public void more_fun_dialog(final Activity nowActivity){
         final AlertDialog.Builder windows = new AlertDialog.Builder(nowActivity);
         windows.setTitle("MORE");
-        final View dialogview = LayoutInflater.from(nowActivity).inflate(R.layout.top_class_menu_more_dialog, null);
+        final View dialogview = LayoutInflater.from(nowActivity).inflate(R.layout.dialog_class_button_more, null);
         windows.setView(dialogview);
         windows.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -68,7 +67,7 @@ public class HomeFragment extends Fragment {
     public void Add_Class_dialogDraw(Activity nowActivity) {
         AlertDialog.Builder windows = new AlertDialog.Builder(nowActivity);
         windows.setTitle("添加课程");
-        final View dialogview = LayoutInflater.from(nowActivity).inflate(R.layout.add_class_dialog, null);
+        final View dialogview = LayoutInflater.from(nowActivity).inflate(R.layout.dialog_add_class, null);
         windows.setView(dialogview);
         windows.setPositiveButton("添加课程", new DialogInterface.OnClickListener() {
             @Override

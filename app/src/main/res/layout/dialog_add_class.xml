@@ -9,14 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="课程名"
-        android:text="test"
         android:maxLines="1" />
 
     <EditText
         android:id="@+id/addclass_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="tom"
         android:hint="教师"
         android:maxLines="1"/>
 
@@ -25,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="教室"
-        android:text="101"
         android:maxLines="1"/>
 
     <EditText
@@ -33,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="课节(第一节课为1)"
-        android:text="2"
         android:maxLines="1"/>
 
     <EditText
@@ -41,7 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="星期（星期一即为1）"
-        android:text="2"
         android:maxLines="1" />
 
     <EditText
@@ -49,7 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="周次(一至三和五至六为1,3;5,6)"
-        android:text=""
         android:maxLines="1" />
 
 
