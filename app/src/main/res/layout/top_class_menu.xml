@@ -49,6 +49,7 @@
             android:textColor="@color/colorAccent" />
         <!--星期一-->
         <LinearLayout
+            android:id="@+id/tcm_content_monday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -70,6 +71,7 @@
         </LinearLayout>
         <!--星期二-->
         <LinearLayout
+            android:id="@+id/tcm_content_tuesday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -91,6 +93,7 @@
         </LinearLayout>
         <!--星期三-->
         <LinearLayout
+            android:id="@+id/tcm_content_wendesday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -112,6 +115,7 @@
         </LinearLayout>
         <!--星期四-->
         <LinearLayout
+            android:id="@+id/tcm_content_thursday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -133,6 +137,7 @@
         </LinearLayout>
         <!--星期五-->
         <LinearLayout
+            android:id="@+id/tcm_content_friday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -154,6 +159,7 @@
         </LinearLayout>
         <!--星期六-->
         <LinearLayout
+            android:id="@+id/tcm_content_saturday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -175,6 +181,7 @@
         </LinearLayout>
         <!--星期日-->
         <LinearLayout
+            android:id="@+id/tcm_content_sunday"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -1,4 +1,4 @@
-package com.focus.android.ui.notifications;
+package com.focus.android.son_content.usercenter;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package com.focus.android.ui.home;
+package com.focus.android.son_content.classtable;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

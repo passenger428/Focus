@@ -1,4 +1,4 @@
-package com.focus.android.ui.dashboard;
+package com.focus.android.son_content.community;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

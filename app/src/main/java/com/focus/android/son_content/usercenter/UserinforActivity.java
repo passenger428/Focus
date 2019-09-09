@@ -1,4 +1,4 @@
-package com.focus.android;
+package com.focus.android.son_content.usercenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.util.Size;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.focus.android.R;
 
 public class UserinforActivity extends AppCompatActivity {
     private TextView btn_icon;

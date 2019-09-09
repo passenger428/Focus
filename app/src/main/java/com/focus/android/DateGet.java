@@ -23,4 +23,10 @@ public class DateGet {
         int month = cd.get(Calendar.MONTH)+1;
         return  String.valueOf(month)+"\n月";
     }
+
+    public static int getToday(){
+        Calendar cd = Calendar.getInstance();
+        int day = cd.get(Calendar.DAY_OF_WEEK);
+        return day;
+    }
 }

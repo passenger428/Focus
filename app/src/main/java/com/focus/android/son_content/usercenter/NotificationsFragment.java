@@ -1,4 +1,4 @@
-package com.focus.android.ui.notifications;
+package com.focus.android.son_content.usercenter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.focus.android.R;
-import com.focus.android.UserinforActivity;
 
 public class NotificationsFragment extends Fragment {
 

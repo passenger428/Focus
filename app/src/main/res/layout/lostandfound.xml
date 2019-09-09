@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:text="标题1"
+            android:textSize="16dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="-370dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+    <LinearLayout>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:text="内容1"
+            android:textSize="14dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="-370dp"
+            android:paddingBottom="70dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:text="标题2"
+            android:textSize="16dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="-370dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+    <LinearLayout>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:text="内容2"
+            android:textSize="14dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="-370dp"
+            android:paddingBottom="70dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:text="标题3"
+            android:textSize="16dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="-370dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+    <LinearLayout>
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:text="lf"
+            android:textSize="14dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="-370dp"
+            android:paddingBottom="70dp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+
+    <!--我要提问按钮-->
+    <LinearLayout
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="我要发布"
+            android:textSize="25dp"
+            android:background="#0099FF"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+</TableLayout>

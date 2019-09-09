@@ -30,14 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="课节(第一节课为1)"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/addclass_classday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="星期（星期一即为1）"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/addclass_classweeks"

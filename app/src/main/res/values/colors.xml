@@ -9,6 +9,7 @@
     <color name="transparent">#00000000</color>
     <color name="black_alpha_128">#80000000</color>
     <color name="list_item_background_pressed">#FCFCFC</color>
+    <color name="today_back_color">#0081E3</color>
 
     <!-- 下拉刷新时，颜色值 -->
     <color name="swiperefresh_color4">#ffaa66cc</color>

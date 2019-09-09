@@ -1,4 +1,4 @@
-package com.focus.android.ui.home;
+package com.focus.android.son_content.classtable;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.focus.android.Add_class_message;
 import com.focus.android.R;
 
 public class HomeFragment extends Fragment {
@@ -127,7 +126,7 @@ public class HomeFragment extends Fragment {
             class_block.setLayoutParams(params);
             class_block.setY(pos);
             TextView tx = class_block.findViewById(R.id.class_block_text);
-            tx.setText(ACM.gors_Class_name(false,null)+ACM.gors_Class_room(false,null));
+            tx.setText(ACM.gors_Class_name(false,null)+"\n"+ACM.gors_Class_room(false,null));
             day.addView(class_block);
         }
 

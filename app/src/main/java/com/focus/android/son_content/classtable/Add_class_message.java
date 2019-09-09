@@ -1,4 +1,4 @@
-package com.focus.android;
+package com.focus.android.son_content.classtable;
 
 import androidx.annotation.Nullable;
 

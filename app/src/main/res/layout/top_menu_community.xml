@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#0099FF">
+        <Button
+            android:id="@+id/schoolcourse"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:layout_weight="1"
+            android:text="校内课程" />
+        <Button
+            android:id="@+id/ITtechnology"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:layout_weight="1"
+            android:text="IT技术" />
+        <Button
+            android:id="@+id/lost"
+            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:background="@null"
+            android:layout_weight="1"
+            android:text="失物招领" />
+    </LinearLayout>
+    <!--搜索栏-->
+    <LinearLayout android:layout_height="40dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search"
+            />
+    </LinearLayout>
+
+</TableLayout>
