@@ -6,14 +6,14 @@
         android:id="@+id/class_button_addclass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="添加课程"/>
+        android:text="@string/add_class"/>
     <Button
         android:id="@+id/class_button_fresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="刷新课表"/>
+        android:text="@string/refresh_schedule"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="更多功能敬请期待"/>
+        android:text="@string/more_functions"/>
 </LinearLayout>

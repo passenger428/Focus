@@ -10,6 +10,9 @@
     <string name="title_home">课程</string>
     <string name="title_dashboard">校园社区</string>
     <string name="title_notifications">个人中心</string>
+    <string name="add_class">添加课程</string>
+    <string name="refresh_schedule">刷新课表</string>
+    <string name="more_functions">更多功能正在开发中</string>
     <string-array name="class_weekends">
         <item>第一周</item>
         <item>第二周</item>
