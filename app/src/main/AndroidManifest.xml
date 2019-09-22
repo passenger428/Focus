@@ -11,25 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".main_surface"
-            android:label="@string/title_activity_main_surface"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="com.Focus.MainSurface"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
+        <activity android:name=".main_tab.BottomTabLayoutActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".son_content.usercenter.UserinforActivity">
-            <intent-filter>
-                <action android:name="com.Focus.UserInfo"/>
-                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>
