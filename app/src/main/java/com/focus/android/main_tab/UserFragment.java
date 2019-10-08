@@ -13,7 +13,7 @@ public class UserFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.table_fragment,container,false);
+        View view = inflater.inflate(R.layout.user_fragment,container,false);
         return view;
     }
     public static UserFragment newInstance(String param1) {
