@@ -41,6 +41,8 @@ public class TableFragment extends Fragment {
     private LinearLayout weekdayall;
     private TextView weekdayword;
     private TextView weekdaydate;
+    private TextView name;
+    private TextView beizhu;
     private BoomMenuButton bmb;
     private String [][][]classes = new String[7][5][7];
     @Override
@@ -53,6 +55,13 @@ public class TableFragment extends Fragment {
         super.onActivityCreated(savedInstance);
         bmb = (BoomMenuButton) getActivity().findViewById(R.id.bmb);
         NiceSpinner spinner = getActivity().findViewById(R.id.nice_spinner);
+        //设置姓名
+        pref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        name = getActivity().findViewById(R.id.name);
+        name.setText(pref.getString("name","error"));
+        //设置备注信息
+        beizhu = getActivity().findViewById(R.id.beizhu);
+        beizhu.setText(pref.getString("beizhu","与服务器通讯错误"));
         studyweek = getStudyWeek();//获取周次
         weekday = DateGet.getTodayWeek();//获取星期日期
         //获取星期和日期显示模块的组件

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,10 +20,22 @@ import com.focus.android.R;
 import com.focus.android.TypeTransition;
 import com.focus.android.main_tab.BottomTabLayoutActivity;
 
+import org.json.JSONObject;
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class LoginActivity extends AppCompatActivity {
+    private String responseData_for_beizhu;
+    private JSONObject jsonObject;
+    private String responseData ;
+    private String responseData_for_course ;
+    private boolean tof;
     private String user_name;
     private String pass_word;
     private SharedPreferences pref;
@@ -31,6 +44,105 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEdit;
     private CheckBox rememberPass;
     private Button Login_button;
+    private void putToDB(){
+        Course[]courses = Course.getCourses(responseData_for_course);
+        LitePal.getDatabase();
+        //清除数据库
+        DataSupport.deleteAll(Courses.class);
+        //向本地数据库中添加课程信息
+        for (int i = 0;i<Course.numOfcourse;i++) {
+            Courses percourses = new Courses();
+            percourses.setCourse_name(courses[i].course_name);
+            percourses.setCourse_number(courses[i].course_number);
+            percourses.setCourse_address(courses[i].course_address);
+            percourses.setCourse_teacher(courses[i].course_teacher);
+            percourses.setSection_number(courses[i].section_number);
+            percourses.setWeek(TypeTransition.inttostring(courses[i].week));//将整形数组转化为字符串
+            percourses.setWeek_day(courses[i].week_day);
+            percourses.save();
+        }
+
+
+            if (rememberPass.isChecked()) {
+                editer.putBoolean("remember_password", true);
+                editer.putString("username", user_name);
+                editer.putString("password", pass_word);
+
+            }else{
+                editer.clear();
+            }
+            editer.putBoolean("istransfer",false);
+            try {
+                editer.putString("name", jsonObject.getString("username"));
+                editer.putString("beizhu",responseData_for_beizhu);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            editer.apply();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(LoginActivity.this, BottomTabLayoutActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+    private void handleResult(){
+        if (tof){
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    try{
+                        OkHttpClient client_for_course = new OkHttpClient();
+                        Request request_for_course = new Request.Builder()
+
+
+
+
+
+                                .url("http://www.baidu.com")//更改为请求课表的url
+
+
+
+
+                                .build();
+                        Response response_for_course = client_for_course.newCall(request_for_course).execute();
+                        responseData_for_course = response_for_course.body().string();
+                        Log.d("kebiao", "run: "+responseData_for_course);
+                        OkHttpClient client_for_beizhu = new OkHttpClient();
+                        Request request_for_beizhu = new Request.Builder()
+
+
+
+                                .url("")//添加请求课表备注信息的URL
+
+
+
+                                .build();
+                        Response response_for_beizhu = client_for_beizhu.newCall(request_for_beizhu).execute();
+                        responseData_for_beizhu = response_for_beizhu.body().string();
+                        Log.d("LOGINTEST", "run: "+responseData_for_beizhu);
+                        putToDB();
+
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+
+        }else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(LoginActivity.this,"教务系统账号或密码不正确",Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +175,7 @@ public class LoginActivity extends AppCompatActivity {
             passwordEdit.setText(pass_word);
             rememberPass.setChecked(true);
         }
+        responseData = "false";
         //登陆按钮的响应事件
         Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,69 +183,40 @@ public class LoginActivity extends AppCompatActivity {
                 //获取输入框中的账号密码
                 user_name = usernameEdit.getText().toString();
                 pass_word = passwordEdit.getText().toString();
-                //设置两个通信结果字符串的初始化值
-                String responseData = new String("true");
-                String responseData_for_course = new String("initial");
-                /*try {
-                    OkHttpClient client = new OkHttpClient();
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("username", user_name)
-                            .add("password", pass_word)
-                            .build();
-                    Request request = new Request.Builder()
-                            .post(requestBody)
-                            .url("")
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    responseData = response.body().string();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            OkHttpClient client = new OkHttpClient();
+                            RequestBody requestBody = new FormBody.Builder()
+                                    .add("username", user_name)
+                                    .add("password", pass_word)
+                                    .build();
+                            Request request = new Request.Builder()
+                                    .post(requestBody)
+                                    .url("http://49.235.233.124:8080/login/")
+                                    .build();
+                            Response response = client.newCall(request).execute();
+                            responseData = response.body().string();
+                            Log.d("LOGINTEST", "run: "+responseData);
+                            jsonObject = new JSONObject(responseData);
+                            tof = jsonObject.getBoolean("loginstats");
+                            Log.d("LOGINTEST", "run: "+tof);
+                            handleResult();
 
-                }catch(Exception e){
-                    e.printStackTrace();
-                }*/
-                if (responseData.equals("true")){
-                    /*try{
-                        OkHttpClient client_for_course = new OkHttpClient();
-                        Request request_for_course = new Request.Builder()
-                                .url("")//添加请求课表的url
-                                .build();
-                        Response response_for_course = client_for_course.newCall(request_for_course).execute();
-                        responseData_for_course = response_for_course.body().string();
-
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }*/
-                    Course []courses = Course.getCourses(responseData_for_course);
-                    LitePal.getDatabase();
-                    //清除数据库
-                    DataSupport.deleteAll(Courses.class);
-                    //向本地数据库中添加课程信息
-                    for (int i = 0;i<Course.numOfcourse;i++){
-                        Courses percourses = new Courses();
-                        percourses.setCourse_name(courses[i].course_name);
-                        percourses.setCourse_number(courses[i].course_number);
-                        percourses.setCourse_address(courses[i].course_address);
-                        percourses.setCourse_teacher(courses[i].course_teacher);
-                        percourses.setSection_number(courses[i].section_number);
-                        percourses.setWeek(TypeTransition.inttostring(courses[i].week));//将整形数组转化为字符串
-                        percourses.setWeek_day(courses[i].week_day);
-                        percourses.save();
+                        }catch(Exception e){
+                            e.printStackTrace();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(LoginActivity.this,"无法连接服务器",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
                     }
-                    if (rememberPass.isChecked()) {
-                        editer.putBoolean("remember_password", true);
-                        editer.putString("username", user_name);
-                        editer.putString("password", pass_word);
+                }).start();
 
-                    }else{
-                        editer.clear();
-                    }
-                    editer.putBoolean("istransfer",false);
-                    editer.apply();
-                    Intent intent = new Intent(LoginActivity.this, BottomTabLayoutActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    Toast.makeText(LoginActivity.this,"教务系统账号或密码不正确",Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 
