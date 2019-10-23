@@ -31,5 +31,30 @@ public class TypeTransition {
         }
         return arrayint;
     }
+    /**
+     * 把用逗号隔开的String字符串转换成String数组
+     * @param s
+     * @return
+     */
+    public static String[] stringToStringArray(String s){
+        return s.split(",");
+    }
+
+    /**
+     * 把String数组转换成用逗号隔开的String字符串
+     * @param sarr
+     * @return
+     */
+    public static String stringArrayToString(String[] sarr){
+        String s = "";
+        for (int i = 0; i < sarr.length; i++) {
+            if (i != sarr.length-1){
+                s=s+sarr[i]+',';
+            }else {
+                s=s+sarr[i];
+            }
+        }
+        return s;
+    }
 }
 

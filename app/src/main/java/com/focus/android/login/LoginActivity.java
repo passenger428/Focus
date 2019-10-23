@@ -33,8 +33,10 @@ import okhttp3.Response;
 public class LoginActivity extends AppCompatActivity {
     private String responseData_for_beizhu;
     private JSONObject jsonObject;
+    private JSONObject jsonObject_for_two;
     private String responseData ;
     private String responseData_for_course ;
+    private String responseData_for_two;
     private boolean tof;
     private String user_name;
     private String pass_word;
@@ -65,13 +67,13 @@ public class LoginActivity extends AppCompatActivity {
 
             if (rememberPass.isChecked()) {
                 editer.putBoolean("remember_password", true);
-                editer.putString("username", user_name);
-                editer.putString("password", pass_word);
 
             }else{
                 editer.clear();
             }
             editer.putBoolean("istransfer",false);
+            editer.putString("username", user_name);
+            editer.putString("password", pass_word);
             try {
                 editer.putString("name", jsonObject.getString("username"));
                 editer.putString("beizhu",responseData_for_beizhu);
@@ -97,38 +99,31 @@ public class LoginActivity extends AppCompatActivity {
 
                     try{
                         OkHttpClient client_for_course = new OkHttpClient();
+                        RequestBody requestBody_for_course = new FormBody.Builder()
+                                .add("username", user_name)
+                                .add("password", pass_word)
+                                .build();
                         Request request_for_course = new Request.Builder()
-
-
-
-
-
-                                .url("http://www.baidu.com")//更改为请求课表的url
-
-
-
-
+                                .post(requestBody_for_course)
+                                .url("http://49.235.233.124:8080/get_schedule/")//更改为请求课表的url
                                 .build();
                         Response response_for_course = client_for_course.newCall(request_for_course).execute();
-                        responseData_for_course = response_for_course.body().string();
-                        Log.d("kebiao", "run: "+responseData_for_course);
-                        OkHttpClient client_for_beizhu = new OkHttpClient();
-                        Request request_for_beizhu = new Request.Builder()
+                        responseData_for_two = response_for_course.body().string();
+                        Log.d("kebiao", "run: "+responseData_for_two);
+                        jsonObject_for_two = new JSONObject(responseData_for_two);
+                        responseData_for_course = jsonObject_for_two.getString("schedule_body");
+                        responseData_for_beizhu = jsonObject_for_two.getString("schedule_extra");
 
-
-
-                                .url("")//添加请求课表备注信息的URL
-
-
-
-                                .build();
-                        Response response_for_beizhu = client_for_beizhu.newCall(request_for_beizhu).execute();
-                        responseData_for_beizhu = response_for_beizhu.body().string();
-                        Log.d("LOGINTEST", "run: "+responseData_for_beizhu);
                         putToDB();
 
                     }catch (Exception e){
                         e.printStackTrace();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(LoginActivity.this,"请求课表信息失败",Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 }
             }).start();
@@ -175,18 +170,20 @@ public class LoginActivity extends AppCompatActivity {
             passwordEdit.setText(pass_word);
             rememberPass.setChecked(true);
         }
-        responseData = "false";
         //登陆按钮的响应事件
         Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //获取输入框中的账号密码
+
                 user_name = usernameEdit.getText().toString();
                 pass_word = passwordEdit.getText().toString();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+
                         try {
+
                             OkHttpClient client = new OkHttpClient();
                             RequestBody requestBody = new FormBody.Builder()
                                     .add("username", user_name)
@@ -200,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
                             responseData = response.body().string();
                             Log.d("LOGINTEST", "run: "+responseData);
                             jsonObject = new JSONObject(responseData);
-                            tof = jsonObject.getBoolean("loginstats");
+                            tof = jsonObject.getBoolean("login_status");
                             Log.d("LOGINTEST", "run: "+tof);
                             handleResult();
 

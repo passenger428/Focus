@@ -1,36 +1,48 @@
 package com.focus.android.main_tab;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.focus.android.Course;
 import com.focus.android.Courses;
 import com.focus.android.DateGet;
 import com.focus.android.R;
 import com.focus.android.TypeTransition;
-import com.focus.android.login.LoginActivity;
 import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomMenuButton;
 
 import org.angmarch.views.NiceSpinner;
 import org.angmarch.views.OnSpinnerItemSelectedListener;
+import org.json.JSONObject;
+import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class TableFragment extends Fragment {
+
+    private String responseData_for_course;
+    private String Data;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editer;
@@ -126,9 +138,61 @@ public class TableFragment extends Fragment {
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        resetisransfer();
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
-                        startActivity(intent);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                OkHttpClient client_for_course = new OkHttpClient();
+                                    RequestBody requestBody_for_course = new FormBody.Builder()
+                                            .add("username", pref.getString("username",""))
+                                            .add("password", pref.getString("password",""))
+                                            .build();
+                                Request request_for_course = new Request.Builder()
+                                        .post(requestBody_for_course)
+                                        .url("http://49.235.233.124:8080/get_schedule/")//更改为请求课表的url
+                                        .build();
+                                Response response_for_course = client_for_course.newCall(request_for_course).execute();
+                                responseData_for_course = response_for_course.body().string();
+                                    Log.d("TEST", "run: "+responseData_for_course);
+
+                                JSONObject jsonObject = new JSONObject(responseData_for_course);
+                                Data = jsonObject.getString("schedule_body");
+
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getContext(),"更新失败", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
+                                Course[]courses = Course.getCourses(Data);
+                                LitePal.getDatabase();
+                                //清除数据库
+                                DataSupport.deleteAll(Courses.class);
+                                //向本地数据库中添加课程信息
+                                for (int i = 0;i<Course.numOfcourse;i++) {
+                                    Courses percourses = new Courses();
+                                    percourses.setCourse_name(courses[i].course_name);
+                                    percourses.setCourse_number(courses[i].course_number);
+                                    percourses.setCourse_address(courses[i].course_address);
+                                    percourses.setCourse_teacher(courses[i].course_teacher);
+                                    percourses.setSection_number(courses[i].section_number);
+                                    percourses.setWeek(TypeTransition.inttostring(courses[i].week));//将整形数组转化为字符串
+                                    percourses.setWeek_day(courses[i].week_day);
+                                    percourses.save();
+                                }
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        setClass(studyweek);
+                                    }
+                                });
+
+                            }
+                        }).start();
+
                     }
                 })
                 .normalImageRes(R.drawable.sync)
@@ -206,13 +270,13 @@ public class TableFragment extends Fragment {
                         if (isThisweek){
                             viewNow.setClickable(true);
                             viewNow.setVisibility(View.VISIBLE);
-                            classes[i][j][0] = courses.get(0).getCourse_name();
-                            classes[i][j][1] = courses.get(0).getCourse_teacher();
-                            classes[i][j][2] = courses.get(0).getCourse_address();
-                            classes[i][j][3] = courses.get(0).getCourse_number();
-                            classes[i][j][4] = Arrays.toString(TypeTransition.stringtoint(courses.get(0).getWeek()));
-                            classes[i][j][5] = String.valueOf(courses.get(0).getWeek_day());
-                            classes[i][j][6] = String.valueOf(courses.get(0).getSection_number());
+                            classes[i][j][0] = courses.get(a).getCourse_name();
+                            classes[i][j][1] = courses.get(a).getCourse_teacher();
+                            classes[i][j][2] = courses.get(a).getCourse_address();
+                            classes[i][j][3] = courses.get(a).getCourse_number();
+                            classes[i][j][4] = Arrays.toString(TypeTransition.stringtoint(courses.get(a).getWeek()));
+                            classes[i][j][5] = String.valueOf(courses.get(a).getWeek_day());
+                            classes[i][j][6] = String.valueOf(courses.get(a).getSection_number());
                             TextView csnow = getActivity().findViewById(DataGenerator.Classes[i][j]);
                             csnow.setText(classes[i][j][0]+"\n"+classes[i][j][1]+"\n@"+classes[i][j][2]);
                             break;
@@ -234,13 +298,7 @@ public class TableFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    //重置是否通过验证的存储标记
-    public void resetisransfer(){
-        pref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        editer = pref.edit();
-        editer.putBoolean("istransfer",true);
-        editer.commit();
-    }
+
 
     //获取周次的具体方法
     public static int getStudyWeek(){
