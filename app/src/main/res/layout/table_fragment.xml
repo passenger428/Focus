@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            app:dropDownListPaddingBottom="570sp"
+            app:dropDownListPaddingBottom="500dp"
             app:entries="@array/class_weekends"
             />
         <com.nightonke.boommenu.BoomMenuButton

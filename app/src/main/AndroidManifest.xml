@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AboutUser.RegisterActivity"></activity>
+        <activity android:name=".AboutUser.VersionActivity"></activity>
+        <activity android:name=".AboutUser.ContactActivity" />
+        <activity android:name=".AboutUser.FocusTimeActivity" />
+        <activity android:name=".AboutUser.RegisterActivity" />
         <activity android:name=".AboutUser.UserInformationActivity" />
         <activity android:name=".main_tab.BottomTabLayoutActivity" />
         <activity android:name=".login.LoginActivity">

@@ -11,8 +11,11 @@ import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 
+import com.focus.android.AboutUser.ContactActivity;
+import com.focus.android.AboutUser.FocusTimeActivity;
 import com.focus.android.AboutUser.RegisterActivity;
 import com.focus.android.AboutUser.UserInformationActivity;
+import com.focus.android.AboutUser.VersionActivity;
 import com.focus.android.R;
 import com.focus.android.login.LoginActivity;
 
@@ -66,7 +69,8 @@ public class UserFragment extends Fragment {
         focus_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getContext(), FocusTimeActivity.class);
+                startActivity(intent);
             }
         });
         release = getActivity().findViewById(R.id.release);
@@ -80,13 +84,16 @@ public class UserFragment extends Fragment {
         contact_us.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getContext(), ContactActivity.class);
+                startActivity(intent);
             }
         });
         version_now = getActivity().findViewById(R.id.version_now);
         version_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getContext(), VersionActivity.class);
+                startActivity(intent);
 
             }
         });

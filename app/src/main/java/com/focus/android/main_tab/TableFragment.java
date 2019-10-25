@@ -143,7 +143,7 @@ public class TableFragment extends Fragment {
                             public void run() {
                                 try{
                                 OkHttpClient client_for_course = new OkHttpClient();
-                                    RequestBody requestBody_for_course = new FormBody.Builder()
+                                RequestBody requestBody_for_course = new FormBody.Builder()
                                             .add("username", pref.getString("username",""))
                                             .add("password", pref.getString("password",""))
                                             .build();
@@ -157,7 +157,7 @@ public class TableFragment extends Fragment {
 
                                 JSONObject jsonObject = new JSONObject(responseData_for_course);
                                 Data = jsonObject.getString("schedule_body");
-
+                                    Log.d("TEST", "run: "+Data);
                                 }catch (Exception e){
                                     e.printStackTrace();
                                     getActivity().runOnUiThread(new Runnable() {

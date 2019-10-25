@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEdit;
     private CheckBox rememberPass;
     private Button Login_button;
+    private Boolean ToF;
     private void putToDB(){
         Course[]courses = Course.getCourses(responseData_for_course);
         LitePal.getDatabase();
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             editer.putString("password", pass_word);
             try {
                 editer.putString("name", jsonObject.getString("username"));
+                Log.d("TEST", "putToDB: "+pref.getString("name","error"));
                 editer.putString("beizhu",responseData_for_beizhu);
             }catch (Exception e){
                 e.printStackTrace();
@@ -139,6 +141,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,11 +155,13 @@ public class LoginActivity extends AppCompatActivity {
         //验证之前是否登陆验证通过，如果之前有通过，则跳向主界面
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editer = pref.edit();
+        ToF = false;
         if (!pref.getBoolean("istransfer",true)){
             Intent intent = new Intent(LoginActivity.this,BottomTabLayoutActivity.class);
             startActivity(intent);
             finish();
         }
+
         //获取一系列组件
         usernameEdit = findViewById(R.id.et_login_username);
         passwordEdit = findViewById(R.id.et_login_pwd);
@@ -174,6 +180,7 @@ public class LoginActivity extends AppCompatActivity {
         Login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ToF = true;
                 //获取输入框中的账号密码
 
                 user_name = usernameEdit.getText().toString();
@@ -218,5 +225,9 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
 
 }
