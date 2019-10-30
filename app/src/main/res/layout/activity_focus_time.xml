@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/bg_login"
     android:orientation="vertical"
     tools:context=".AboutUser.FocusTimeActivity">
+    <include
+        android:id="@+id/ly_retrieve_bar_focus_time"
+        layout="@layout/activity_main_login_navigation_bar" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:text="你的专注时间:\n"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="20dp"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

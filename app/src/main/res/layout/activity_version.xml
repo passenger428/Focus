@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@mipmap/bg_login"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AboutUser.VersionActivity">
+    <include
+        android:id="@+id/ly_retrieve_bar_version"
+        layout="@layout/activity_main_login_navigation_bar" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,6 +17,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textSize="20dp"
+        android:textColor="@color/white"
         android:textIsSelectable="true"
         android:textAlignment="textStart"
         android:text="当前版本为1.0版本，后续我们将继续更新与维护！"/>

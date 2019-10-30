@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,8 @@ public class FocusTimeActivity extends AppCompatActivity {
         if (actionBar != null) {//隐藏顶部的bar；
             actionBar.hide();
         }
+        TextView title = findViewById(R.id.tv_navigation_label);
+        title.setText("专注时间");
         new Thread(new Runnable() {
             @Override
             public void run() {

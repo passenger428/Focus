@@ -39,6 +39,8 @@ public class UserInformationActivity extends AppCompatActivity {
         if (actionBar != null) {//隐藏顶部的bar；
             actionBar.hide();
         }
+        TextView title = findViewById(R.id.tv_navigation_label);
+        title.setText("个人信息");
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         name = findViewById(R.id.name);
         sex = findViewById(R.id.sex);
