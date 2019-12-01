@@ -30,7 +30,7 @@ public class DateGet {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if(week_index<0){
+        if(week_index<=0){
             week_index = 7;
         }
         return week_index;
