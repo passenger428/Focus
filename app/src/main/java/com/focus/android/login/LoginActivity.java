@@ -113,7 +113,14 @@ public class LoginActivity extends AppCompatActivity {
                         responseData_for_two = response_for_course.body().string();
                         Log.d("kebiao", "run: "+responseData_for_two);
                         jsonObject_for_two = new JSONObject(responseData_for_two);
+
+                        //responseData_for_two 服务器端返回的原始数据
+
                         responseData_for_course = jsonObject_for_two.getString("schedule_body");
+
+
+                        //备注之间可以改动
+
                         responseData_for_beizhu = jsonObject_for_two.getString("schedule_extra");
 
                         putToDB();
