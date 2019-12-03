@@ -13,6 +13,7 @@ public class CommunityFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
         View view = inflater.inflate(R.layout.community_fragment,container,false);
         return view;
     }

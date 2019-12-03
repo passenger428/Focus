@@ -36,6 +36,7 @@ public class BottomTabLayoutActivity extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+
                 onTabItemSelected(tab.getPosition());
                 // Tab 选中之后，改变各个Tab的状态
                 for (int i=0;i<mTabLayout.getTabCount();i++){

@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.focus.android.Course;
+import com.focus.android.CourseConver;
 import com.focus.android.Courses;
 import com.focus.android.DateGet;
 import com.focus.android.R;
@@ -167,20 +168,24 @@ public class TableFragment extends Fragment {
                                         }
                                     });
                                 }
-                                Course[]courses = Course.getCourses(Data);
+                                CourseConver cc = new CourseConver();
+                                Course[]courses = cc.getCourses(Data);
+                                Course.numOfcourse = courses.length;
                                 LitePal.getDatabase();
                                 //清除数据库
                                 DataSupport.deleteAll(Courses.class);
                                 //向本地数据库中添加课程信息
                                 for (int i = 0;i<Course.numOfcourse;i++) {
                                     Courses percourses = new Courses();
-                                    percourses.setCourse_name(courses[i].course_name);
-                                    percourses.setCourse_number(courses[i].course_number);
-                                    percourses.setCourse_address(courses[i].course_address);
-                                    percourses.setCourse_teacher(courses[i].course_teacher);
-                                    percourses.setSection_number(courses[i].section_number);
-                                    percourses.setWeek(TypeTransition.inttostring(courses[i].week));//将整形数组转化为字符串
-                                    percourses.setWeek_day(courses[i].week_day);
+                                    percourses.setCourse_name(courses[i].getCourse_name());
+                                    Log.d("ceshi", "runname: "+courses[i].getCourse_name());
+                                    percourses.setCourse_number(courses[i].getCourse_number());
+                                    Log.d("ceshi", "runnumber: "+courses[i].getCourse_number());
+                                    percourses.setCourse_address(courses[i].getCourse_address());
+                                    percourses.setCourse_teacher(courses[i].getCourse_teacher());
+                                    percourses.setSection_number(courses[i].getSection_number());
+                                    percourses.setWeek(TypeTransition.inttostring(courses[i].getWeek()));//将整形数组转化为字符串
+                                    percourses.setWeek_day(courses[i].getWeek_day());
                                     percourses.save();
                                 }
                                 getActivity().runOnUiThread(new Runnable() {
